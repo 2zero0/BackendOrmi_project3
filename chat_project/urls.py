@@ -3,6 +3,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mychatbot', include("mychatbot.urls")),
-    path('chatlog', include("chatlog.urls")),
+    path('mychatbot/', include("mychatbot.urls")),
+    path('chatlog/', include("chatlog.urls")),
+    path('user/', include("user.urls")),
 ]

@@ -51,7 +51,7 @@ class ChatbotView(View):
 
             # ChatMessage 모델에 대화 내역 저장
             conversation_content = f"prompt: {prompt} / response: {response}"
-            chat_message = ChatMessage(content=conversation_content)
+            chat_message = ChatMessage(sender=request.user, content=conversation_content)
             chat_message.save()
 
         return self.get(request, *args, **kwargs)
