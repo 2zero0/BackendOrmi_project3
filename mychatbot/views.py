@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import openai
 from .models import Conversation
 from chatlog.models import ChatMessage  # chatlog 앱 - ChatMessage 모델
+from django.http import JsonResponse
 
 load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -50,8 +51,13 @@ class ChatbotView(View):
             request.session.modified = True
 
             # ChatMessage 모델에 대화 내역 저장
-            conversation_content = f"prompt: {prompt} / response: {response}"
-            chat_message = ChatMessage(sender=request.user, content=conversation_content)
-            chat_message.save()
+            # conversation_content = f"prompt: {prompt} / response: {response}"
+            # chat_message = ChatMessage(sender=request.user, content=conversation_content)
+            # chat_message.save()
+
+            ## 기존 html-js 프로젝트와 통신 위한 코드
+            # JsonResponse로 응답 data를 보내기
+            res_data = {'choices': [{'message': {'content': response}}]}
+            return JsonResponse(res_data)
 
         return self.get(request, *args, **kwargs)

@@ -19,7 +19,7 @@ class Registration(View):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('mychatbot:chat')
+            return redirect('user:login')
         
         context = {
             'form': form
@@ -29,8 +29,8 @@ class Registration(View):
 ### Login
 class Login(View):
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('mychatbot:chat')
+        # if request.user.is_authenticated:
+        #     return redirect('mychatbot:chat')
         
         form = LoginForm()
         context = {

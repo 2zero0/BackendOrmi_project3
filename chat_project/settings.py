@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-6kcidlr)mv09-nly@@+bhl4a_cke8-sj#6l5q1c9)ufn59=p#6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # OpenAI API key
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',  # CORS
     'mychatbot', # chatbot app
     'chatlog', # chatlog app
     'user', # user app
@@ -51,11 +52,17 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # 추가
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+## 특정 도메인에서만 접근 허용
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500", # 허용 도메인 추가
 ]
 
 ROOT_URLCONF = 'chat_project.urls'
