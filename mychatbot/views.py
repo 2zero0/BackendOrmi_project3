@@ -6,10 +6,10 @@ import openai
 from .models import Conversation
 from chatlog.models import ChatMessage  # chatlog 앱 - ChatMessage 모델
 from django.http import JsonResponse
+import json
 
 load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
-
 
 class ChatbotView(View):
     def get(self, request, *args, **kwargs):
@@ -17,7 +17,11 @@ class ChatbotView(View):
         return render(request, 'chat.html', {'conversations': conversations})
 
     def post(self, request, *args, **kwargs):
-        prompt = request.POST.get('prompt')
+        # 자바스크립트와 통신
+        data = json.loads(request.body)
+        prompt = data.get('prompt')
+
+        # prompt = request.POST.get('prompt')
         if prompt:
             # 이전 대화 기록 가져오기
             session_conversations = request.session.get('conversations', [])
@@ -45,7 +49,7 @@ class ChatbotView(View):
             # session_conversations.append(conversation)
             # request.session['conversations'] = session_conversations
 
-            # 대화 기록에 새로운 응답 추가
+            # 대화 기록에 새로운 응답 추가 (수정된 코드)
             session_conversations.append({'prompt': prompt, 'response': response})
             request.session['conversations'] = session_conversations
             request.session.modified = True
@@ -59,5 +63,8 @@ class ChatbotView(View):
             # JsonResponse로 응답 data를 보내기
             res_data = {'choices': [{'message': {'content': response}}]}
             return JsonResponse(res_data)
+        
+        else:
+            return JsonResponse({"error": "No prompt provided"}, status=400)
 
-        return self.get(request, *args, **kwargs)
+        # return self.get(request, *args, **kwargs)

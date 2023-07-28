@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-6kcidlr)mv09-nly@@+bhl4a_cke8-sj#6l5q1c9)ufn59=p#6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 # OpenAI API key
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
@@ -62,8 +62,10 @@ MIDDLEWARE = [
 
 ## 특정 도메인에서만 접근 허용
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500", # 허용 도메인 추가
+    "http://127.0.0.1:5500",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'chat_project.urls'
 
