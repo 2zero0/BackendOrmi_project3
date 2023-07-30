@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .forms import RegisterForm, LoginForm
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from .models import User
 
 ### Registration
 class Registration(View):
@@ -64,3 +67,27 @@ class Logout(View):
     def get(self, request):
         logout(request)
         return redirect('mychatbot:chat')
+    
+
+### JWT
+### Register
+class RegistrationAPIView(APIView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        nickname = request.data.get("nickname")
+
+        if User.objects.filter(username=username).exists():
+            message = "User already exists."
+            status_code = status.HTTP_400_BAD_REQUEST
+        else:
+            user = User.objects.create_user(username=username, password=password,  nickname = nickname)
+            user.save()
+            message = "Registration successful."
+            status_code = status.HTTP_201_CREATED
+        
+        return Response({"message": message}, status=status_code)
