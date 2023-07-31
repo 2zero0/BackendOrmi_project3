@@ -23,4 +23,7 @@ urlpatterns = [
     ## JWT
     path('api-token-auth/', TokenObtainPairView.as_view(), name='api-token-auth'),
     path('api-token-refresh/', TokenRefreshView.as_view(), name='api-token-refresh'),
+
+    # 사용자 정보
+    path('userinfo/', views.UserInfoAPIView.as_view(), name='userinfo'),
 ]

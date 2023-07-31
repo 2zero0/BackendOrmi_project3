@@ -4,12 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
 from .forms import RegisterForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .models import User
 from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.http import JsonResponse
 
 ### Registration
 class Registration(View):
@@ -98,19 +100,24 @@ class RegistrationAPIView(APIView):
 ### login
 class LoginAPIView(APIView):
     def post(self, request):
-        username = request.data.get("username")
-        password = request.data.get("password")
-        user = authenticate(request, username=username, password=password)
+      username = request.data.get("username")
+      password = request.data.get("password")
+      user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            # jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-            # jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-            # payload = jwt_payload_handler(user)
-            # token = jwt_encode_handler(payload)
-            refresh = RefreshToken.for_user(user)
-            message = "로그인 성공"
-            # return Response({"message": message, "token": token}, status=status.HTTP_200_OK)
-            return Response({"message": message, "access": str(refresh.access_token), "refresh": str(refresh)}, status=status.HTTP_200_OK)
-        else:
-            message = "로그인 실패"
-            return Response({"message": message}, status=status.HTTP_401_UNAUTHORIZED)
+      if user is not None:
+        refresh = RefreshToken.for_user(user)
+        message = "로그인 성공"
+
+        return Response({"message": message, "access": str(refresh.access_token), "refresh": str(refresh)}, status=status.HTTP_200_OK)
+      else:
+        message = "로그인 실패"
+        return Response({"message": message}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+### User Info
+class UserInfoAPIView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        user = request.user
+        return JsonResponse({"username": user.username, "nickname": user.nickname}, safe=False)

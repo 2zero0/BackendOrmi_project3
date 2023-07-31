@@ -121,9 +121,9 @@ class ChatbotAPIView(APIView):
             request.session.modified = True
 
             # ChatMessage 모델에 대화 내역 저장
-            # conversation_content = f"prompt: {prompt} / response: {response}"
-            # chat_message = ChatMessage(sender=request.user, content=conversation_content)
-            # chat_message.save()
+            conversation_content = f"prompt: {prompt} / response: {response}"
+            chat_message = ChatMessage(sender=request.user, content=conversation_content)
+            chat_message.save()
 
             ## 기존 html-js 프로젝트와 통신 위한 코드
             # JsonResponse로 응답 data를 보내기
