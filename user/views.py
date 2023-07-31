@@ -8,6 +8,8 @@ from .forms import RegisterForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .models import User
+from rest_framework_simplejwt.settings import api_settings
+from rest_framework_simplejwt.tokens import RefreshToken
 
 ### Registration
 class Registration(View):
@@ -69,12 +71,12 @@ class Logout(View):
         return redirect('mychatbot:chat')
     
 
-### JWT
+### JWT, DRF
 ### Register
 class RegistrationAPIView(APIView):
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+    # @method_decorator(csrf_exempt)
+    # def dispatch(self, *args, **kwargs):
+    #     return super().dispatch(*args, **kwargs)
 
     def post(self, request):
         username = request.data.get("username")
@@ -91,3 +93,24 @@ class RegistrationAPIView(APIView):
             status_code = status.HTTP_201_CREATED
         
         return Response({"message": message}, status=status_code)
+    
+
+### login
+class LoginAPIView(APIView):
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+            # jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+            # payload = jwt_payload_handler(user)
+            # token = jwt_encode_handler(payload)
+            refresh = RefreshToken.for_user(user)
+            message = "로그인 성공"
+            # return Response({"message": message, "token": token}, status=status.HTTP_200_OK)
+            return Response({"message": message, "access": str(refresh.access_token), "refresh": str(refresh)}, status=status.HTTP_200_OK)
+        else:
+            message = "로그인 실패"
+            return Response({"message": message}, status=status.HTTP_401_UNAUTHORIZED)
