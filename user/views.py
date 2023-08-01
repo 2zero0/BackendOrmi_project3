@@ -100,18 +100,18 @@ class RegistrationAPIView(APIView):
 ### login
 class LoginAPIView(APIView):
     def post(self, request):
-      username = request.data.get("username")
-      password = request.data.get("password")
-      user = authenticate(request, username=username, password=password)
-
-      if user is not None:
-        refresh = RefreshToken.for_user(user)
-        message = "로그인 성공"
-
-        return Response({"message": message, "access": str(refresh.access_token), "refresh": str(refresh)}, status=status.HTTP_200_OK)
-      else:
-        message = "로그인 실패"
-        return Response({"message": message}, status=status.HTTP_401_UNAUTHORIZED)
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            message = "로그인 성공"
+            
+            return Response({"message": message, "access": str(refresh.access_token), "refresh": str(refresh)}, status=status.HTTP_200_OK)
+        else:
+            message = "로그인 실패"
+            return Response({"message": message}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 ### User Info

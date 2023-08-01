@@ -87,7 +87,6 @@ class ChatbotAPIView(APIView):
         data = json.loads(request.body)
         prompt = data.get('prompt')
 
-        # prompt = request.POST.get('prompt')
         if prompt:
             # 이전 대화 기록 가져오기
             session_conversations = request.session.get('conversations', [])
@@ -109,20 +108,19 @@ class ChatbotAPIView(APIView):
             conversation = Conversation(prompt=prompt, response=response)
             conversation.save()
 
-            # conversation = {'prompt': prompt, 'response': response}
-
-            # 대화 기록에 새로운 응답 추가
-            # session_conversations.append(conversation)
-            # request.session['conversations'] = session_conversations
-
-            # 대화 기록에 새로운 응답 추가 (수정된 코드)
+            # 세션 내용이 변했음을 감지 -> 변경 내용 DB 저장
             session_conversations.append({'prompt': prompt, 'response': response})
             request.session['conversations'] = session_conversations
             request.session.modified = True
 
-            # ChatMessage 모델에 대화 내역 저장
-            conversation_content = f"prompt: {prompt} / response: {response}"
-            chat_message = ChatMessage(sender=request.user, content=conversation_content)
+            recent_user_prompt = None
+            for item in reversed(prompt):
+                if item['role'] == 'user':
+                  recent_user_prompt = item['content']
+                  break
+
+            # ChatMessage 모델에 사용자 정보, 질문, 답변 저장
+            chat_message = ChatMessage(sender=request.user, prompt=recent_user_prompt, response=response)
             chat_message.save()
 
             ## 기존 html-js 프로젝트와 통신 위한 코드
