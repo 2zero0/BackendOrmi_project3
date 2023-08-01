@@ -10,9 +10,9 @@ from django.utils.decorators import method_decorator
 ### List
 class Index(APIView):
     # 로그인이 필요한 데코레이터 추가
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(Index, self).dispatch(*args, **kwargs)
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     return super(Index, self).dispatch(*args, **kwargs)
     
     def get(self, request):
         # chatmsgs = ChatMessage.objects.all()
