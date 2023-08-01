@@ -16,6 +16,6 @@ class Index(APIView):
     
     def get(self, request):
         # chatmsgs = ChatMessage.objects.all()
-        chatmsgs = ChatMessage.objects.filter(sender=request.user)
+        chatmsgs = ChatMessage.objects.filter(sender=request.user).order_by('-timestamp')
         serialized_chatmsgs = ChatMessageSerializer(chatmsgs, many=True)
         return Response(serialized_chatmsgs.data)
