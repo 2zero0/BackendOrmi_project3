@@ -90,21 +90,20 @@ WSGI_APPLICATION = 'chat_project.wsgi.application'
 
 
 ## REST Framework
-# REST_FRAMEWORK = {
-#     'DEFAULT_THROTTLE_CLASS': {
-#         'rest_framework.throttling.AnonRateThrottle',
-#         'rest_framework.throttling.UserRateThrottle'
-#     },
-#     'DEFAULT_THROTTLE_RATES': {
-#         'anon': '0/hour', # 로그인하지 않은 사용자는 이용할 수 없음
-#         'user': '5/day', # 인증된 사용자는 하루에 5번 요청 가능
-#     }
-# }
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "0/hour",  # 로그인하지 않은 사용자는 이용 불가
+        "user": "5/day",  # 인증된 사용자는 하루에 5번 요청 가능
+    },
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
+
 
 ## JWT
 SIMPLE_JWT = {

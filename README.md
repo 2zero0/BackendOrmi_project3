@@ -189,8 +189,12 @@
     |           
     \---__pycache__
 ```
+### 3.2 DB 구조(ERD)
 
-### 3.1 개발 일정(WBS)
+<img width="80%" src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/5ee94c40-2cde-442f-9921-6f26a892c614">
+
+
+### 3.3 개발 일정(WBS)
 
 - 7/26: DB 구조 및 개발 일정 계획
 - 7/27: DRF 기본 세팅, 모델 구현
@@ -202,7 +206,7 @@
 
 ## 4. 역할 분담
 
-- 모든 역할과 작업은 개인이 수행함
+- 모든 역할과 작업은 개인이 수행
 
 ## 5. UI / BM
 
@@ -262,4 +266,19 @@
 
 ## 7. 개발하며 느낀점
 
-- 
+- 개인으로 OpenAI 키를 발급 받아 여러차례 테스트하면서 개발을 진행했었는데 RateLimitError가 났었습니다. 무료에는 사용량 한계가 있는 점을 간과하고 과도한 테스트를 하다보니 한 2일만에 그 사용량을 초과 해 버렸습니다. 이에 결국 멘토님께 요청하여 키를 한번 더 발급 받아 사용하게 되었습니다. 무료 계정일 경우 테스트를 다소 가볍게하지 않는 것이 좋겠습니다.
+
+- 초기 CORS 에러로 인하여 settings.py 파일의 INSTALLED_APPS에 'corsheaders'를 추가해줬고 MIDDLEWARE에 'corsheaders.middleware.CorsMiddleware'를 추가, 프론트엔드와 원할한 통신을 위하여
+CORS_ALLOWED_ORIGINS = [ "FrontURL", ] 이러한 코드를 설정에 추가하여 해결하였습니다.
+
+- 채팅 내용 상세보기 같은 경우 프론트단에서 "user_chatlog_detail.html?logId=${log.id}" 이러한 형식으로 각 질문마다 a 태그의 하이퍼링크 뒤에 매개변수를 걸어주고 상세보기 페이지에서는 JavaScript의 API와 내장 함수인
+URLSearchParams(window.location.search).get("logId")
+URLSearchParams를 이용하여 특정 채팅 내용 id 값을 추출한 후 
+chatLogs.find(log => log.id === logId)
+find로 채팅 목록 중 앞서 추출한 id값을 가진 채팅 내용을 찾아 사용자에게 보여줄 수 있도록하였습니다.
+
+- 인증과 관련하여 JWT를 사용하였는데 로그인시 발급 받은 accsee토큰을 로컬 스토리지에 저장하고 사용자 정보 관련한 접근시 클라이언트는 로컬스토리지에 있는 토큰 값을 headers에 담아 장고 DRF서버로 요청하면 인증 관련 응답을 보내줍니다. <br>
+JWT를 완벽히 이해하는데는 시간이 짧아 사실 제대로 알고 쓴 건지는 잘 모르겠습니다. 프로젝트를 더욱 고도화시키면서 JWT를 이해하고 활용하기 위해서 시간을 들여야할 것 같습니다.
+
+- serializer 없이 json형식으로 요청을 보내고 받아오는식으로 직접 구현하였습니다.<br>
+serializer와 routor, ViewSet이 DRF의 대표적인 클래스라고하여 이 세가지를 활용해 보고 싶었는데 그러지 못하여 아쉽습니다. 이제 첫 걸음을 뗐으니 더욱 걸음을 내딛으면서 DRF와 친숙해지도록 해야겠습니다.
