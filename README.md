@@ -225,7 +225,7 @@
 <br>
 
 - user_chatlog_list.html <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/a4817a8f-e8c9-41f9-9b6f-909a11b2909f" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/d6894448-9635-4013-a21b-35b804d960bb" width="80%">
 <br>
 
 - user_chatlog_detail.html
@@ -238,7 +238,12 @@
   (ChatGPT API 이용) <br>
   <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/ccab4bb4-55a0-47ad-8609-84e94f2b5c6b" width="80%">
   <br>
-  - 챗봇 5회 초과 사용 불가<br>
+
+  - 미로그인 사용자 챗봇 사용 불가<br>
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/04503dd2-2005-4675-969b-b1db42dd7079" width="80%">
+  <br>
+  
+  - 챗봇 하루 5회 초과시 사용 불가<br>
   <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/47442eb6-f544-4536-ad69-f03f2ad76c3e" width="80%">
 <br>
 
@@ -252,7 +257,7 @@
 <br>
 
 - 채팅 목록 / 상세내용 <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/522c5b41-80d1-40b3-88e1-0a43473df797" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/44622f70-e87c-4e0a-9099-3feb62bbcf7a" width="80%">
 <br>
 
 ## 7. 개발하며 느낀점
