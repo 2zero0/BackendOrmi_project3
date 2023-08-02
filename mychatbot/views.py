@@ -3,8 +3,8 @@ from django.views import View
 import os
 from dotenv import load_dotenv
 import openai
-from .models import Conversation
-from chatlog.models import ChatMessage  # chatlog 앱 - ChatMessage 모델
+from .models import Conversation, ChatRequestCounter
+from chatlog.models import ChatMessage  # chatlog 앱의 모델
 # json
 from django.http import JsonResponse
 import json
@@ -12,6 +12,8 @@ import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.exceptions import ObjectDoesNotExist
+import datetime
 
 load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -83,6 +85,20 @@ class ChatbotAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
         print('API 통신 성공')
+        user = request.user
+        today = datetime.date.today()
+        try:
+            chat_request_counter = ChatRequestCounter.objects.get(user=user, date=today)
+        except ObjectDoesNotExist:
+            chat_request_counter = ChatRequestCounter(user=user, date=today)
+            chat_request_counter.save()
+
+        if chat_request_counter.count >= 5:
+            return Response({"error": "하루 5회 요청 제한에 도달했습니다."}, status=status.HTTP_429_TOO_MANY_REQUESTS)
+
+        chat_request_counter.count += 1
+        chat_request_counter.save()
+
         # 자바스크립트와 통신
         data = json.loads(request.body)
         prompt = data.get('prompt')
