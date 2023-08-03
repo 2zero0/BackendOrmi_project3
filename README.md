@@ -232,7 +232,7 @@
   <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/d6894448-9635-4013-a21b-35b804d960bb" width="80%">
 <br>
 
-- user_chatlog_detail.html
+- user_chatlog_detail.html <br>
   <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/1375fe69-8396-4838-9d68-1c719950e453" width="80%">
 <br>
 
@@ -277,8 +277,8 @@ URLSearchParams를 이용하여 특정 채팅 내용 id 값을 추출한 후
 chatLogs.find(log => log.id === logId)
 find로 채팅 목록 중 앞서 추출한 id값을 가진 채팅 내용을 찾아 사용자에게 보여줄 수 있도록하였습니다.
 
-- 인증과 관련하여 JWT를 사용하였는데 로그인시 발급 받은 accsee토큰을 로컬 스토리지에 저장하고 사용자 정보 관련한 접근시 클라이언트는 로컬스토리지에 있는 토큰 값을 headers에 담아 장고 DRF서버로 요청하면 인증 관련 응답을 보내줍니다. <br>
+- 인증과 관련하여 JWT를 사용하였는데 로그인시 발급 받은 ACCESS토큰을 로컬 스토리지에 저장하고 사용자 정보 관련한 접근시 클라이언트는 로컬스토리지에 있는 토큰 값을 headers에 담아 장고 DRF서버로 요청하면 인증 관련 응답을 보내줍니다. <br>
 JWT를 완벽히 이해하는데는 시간이 짧아 사실 제대로 알고 쓴 건지는 잘 모르겠습니다. 프로젝트를 더욱 고도화시키면서 JWT를 이해하고 활용하기 위해서 시간을 들여야할 것 같습니다.
 
-- serializer 없이 json형식으로 요청을 보내고 받아오는식으로 직접 구현하였습니다.<br>
-serializer와 routor, ViewSet이 DRF의 대표적인 클래스라고하여 이 세가지를 활용해 보고 싶었는데 그러지 못하여 아쉽습니다. 이제 첫 걸음을 뗐으니 더욱 걸음을 내딛으면서 DRF와 친숙해지도록 해야겠습니다.
+- Serializer 없이 json형식으로 요청을 보내고 받아오는식으로 직접 구현하였습니다.<br>
+Serializer와 Router, ViewSet이 DRF의 대표적인 클래스라고하여 이 세가지를 활용해 보고 싶었는데 그러지 못하여 아쉽습니다. 이제 첫 걸음을 뗐으니 더욱 걸음을 내딛으면서 DRF와 친숙해지도록 해야겠습니다.
