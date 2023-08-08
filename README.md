@@ -225,7 +225,7 @@
 <br>
 
 - result.html <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/7c7ddcb8-25d6-4cc3-a736-3c092bd29e61" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/95bb37e3-8389-44a4-81ed-9c2cc38c2304" width="80%">
 <br>
 
 - user_chatlog_list.html <br>
