@@ -96,8 +96,8 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.UserRateThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "anon": "0/hour",  # 로그인하지 않은 사용자는 이용 불가
-        "user": "5/day",  # 인증된 사용자는 하루에 5번 요청 가능
+        "anon": "1000/hour",  # 개발 환경에서 로그인하지 않은 사용자 이용 가능
+        "user": "1000/hour",  # 개발 환경에서 인증된 사용자는 시간당 1000번 요청 가능
     },
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",

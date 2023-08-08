@@ -6,8 +6,7 @@ from .serializers import ChatMessageSerializer
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-# Create your views here.
-### List
+### User's chatlog List
 class Index(APIView):
     # 로그인이 필요한 데코레이터 추가
     # @method_decorator(login_required)
@@ -15,7 +14,6 @@ class Index(APIView):
     #     return super(Index, self).dispatch(*args, **kwargs)
     
     def get(self, request):
-        # chatmsgs = ChatMessage.objects.all()
         chatmsgs = ChatMessage.objects.filter(sender=request.user).order_by('-timestamp')
         serialized_chatmsgs = ChatMessageSerializer(chatmsgs, many=True)
         return Response(serialized_chatmsgs.data)
