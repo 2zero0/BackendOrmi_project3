@@ -229,18 +229,18 @@
 <br>
 
 - user_chatlog_list.html <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/d6894448-9635-4013-a21b-35b804d960bb" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/00ce2721-5d56-45b4-b5ad-6a9b524cd9c0" width="80%">
 <br>
 
 - user_chatlog_detail.html <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/1375fe69-8396-4838-9d68-1c719950e453" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/2a88d066-95b1-429e-8078-697a84f95210" width="80%">
 <br>
 
 ## 6. 메인 기능
 
 - 사용자가 냉장고 속 재료를 입력하면 재료를 활용해 만들 수 있는 요리 목록 출력
   (ChatGPT API 이용) <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/ccab4bb4-55a0-47ad-8609-84e94f2b5c6b" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/416f1771-4195-484e-9511-ec63da03b1ac" width="80%">
   <br>
 
   - 미로그인 사용자 챗봇 사용 불가<br>
@@ -261,7 +261,7 @@
 <br>
 
 - 사용자별 채팅 목록 / 상세내용 <br>
-  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/44622f70-e87c-4e0a-9099-3feb62bbcf7a" width="80%">
+  <img src="https://github.com/2zero0/BackendOrmi_project3/assets/43246395/cbb92008-505e-4ce2-a130-f5197d1c7d12" width="80%">
 <br>
 
 ## 7. 개발하며 느낀점
